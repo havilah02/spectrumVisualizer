@@ -1,0 +1,24 @@
+import numpy as np
+def peak_differences(mz_list): # mz_list is a list containing all the m/z values from a mass spectrum, each value is an ion detected in the mass spec
+    """This function calculates the pairwise differences of the elements in the m/z array of an ms2 spectra
+    and returns a list of differences.
+
+    Args:
+        mz_list
+    """
+    differences = []
+    for i in range(len(mz_list)):
+        for j in range(i+1, len(mz_list)):
+            mz1 = mz_list[i]
+            mz2 = mz_list[j]
+            difference = abs(mz1-mz2)
+            differences.append(difference)
+    # print(f"The peaks in the current scan:\n", mz_list)
+    # print(f"The differences of these peaks:\n", differences)    
+    return differences
+# extract the m/z values of the current scan
+current_mz_values = current_scan['m/z array']
+# print the peak differences of the current scans m/z values
+current_differences = peak_differences(current_mz_values)
+print("current mz values: ", current_mz_values)
+print("differences of m/z values: ", current_differences)

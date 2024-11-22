@@ -1,0 +1,23 @@
+from pyteomics import mzml
+import plotly.graph_objects as go
+
+# Load the mzML file
+mzml_file = ('/Volumes/Lab/HM/MQ_test_data/example_QC/2024-10-09_QC_LF_DDA_e240.mzML')
+
+def extract_ms2(mzml_file):
+    """This function takes an mzml file path and outputs only the first ten MS2 scans
+    """
+    # ms2_spectra = [spectrum for spectrum in reader if spectrum['ms level'] == 2]
+    with mzml.MzML(mzml_file) as data:
+        count = 0
+        ms2_spectra = []
+        for spectrum in data:
+            if spectrum['ms level'] == 2:
+                ms2_spectra.append(spectrum)
+                count += 1
+                if count > 10:
+                    break
+
+    return ms2_spectra
+
+extract_ms2(mzml_file)

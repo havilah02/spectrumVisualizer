@@ -1,0 +1,28 @@
+import matplotlib.pyplot as plt
+
+def plot_2(spectrum, x_min=None, x_max=None, title=None):
+    X = spectrum['m/z array']
+    Y = spectrum['intensity array']
+    Y_max = max(Y)
+    Y_percentage = [(y / Y_max) * 100 for y in Y]
+
+    # set x-axis limits
+    if x_min is None:
+        x_min = min(X)
+    if x_max is None:
+        x_max = max(X)
+
+    plt.figure(figsize=(10,6))
+    plt.vlines(X, 0, Y_percentage, colors='black') # vertical lines at each m/z 
+
+    plt.title(title)
+    plt.xlabel('m/z')
+    plt.ylabel('Intensity')
+    plt.xlim(x_min, x_max)
+    plt.ylim(0, 105)
+    
+    plt.title(f"Mass Spectrum at scan 8")
+    plt.show()
+
+# from previous step
+plot2(current_scan)
